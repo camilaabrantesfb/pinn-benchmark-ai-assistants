@@ -107,7 +107,6 @@ torch>=2.0
 numpy
 scipy
 matplotlib
-pyDOE
 ```
 
 ---
@@ -118,7 +117,7 @@ pyDOE
 
 | Tool | Rel. L² Error | Final Loss | Prompt Iterations | Notes |
 |---|---|---|---|---|
-| Claude | — | — | 1 | Pending run |
+| Claude | 1.06e-01 | 1.78e-04 | 1 | 5000 Adam + 1000 L-BFGS steps |
 | Cursor | — | — | — | Pending |
 | GitHub Copilot | — | — | — | Pending |
 | IBM Bob | — | — | — | Conditional |
