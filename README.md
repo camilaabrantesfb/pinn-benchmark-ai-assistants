@@ -92,6 +92,9 @@ cd pinn-benchmark-ai-assistants
 
 pip install -r requirements.txt
 
+# Run Cursor's pipeline (Iteration 1)
+python cursor/iter1/burgers_pinn_cursor_iter1.py
+
 # Run Claude's pipeline (Iteration 1)
 python claude/iter1/burgers_pinn_claude_iter1.py
 ```
@@ -113,12 +116,10 @@ matplotlib
 
 ## Results Summary
 
-*(To be updated as experiments complete)*
-
 | Tool | Rel. L² Error | Final Loss | Prompt Iterations | Notes |
 |---|---|---|---|---|
 | Claude | 1.06e-01 | 1.78e-04 | 1 | 5000 Adam + 1000 L-BFGS steps |
-| Cursor | — | — | — | Pending |
+| Cursor | 1.22e-01 | 1.93e-04 | 1 | 5000 Adam + 1000 L-BFGS steps |
 | GitHub Copilot | — | — | — | Pending |
 | IBM Bob | — | — | — | Conditional |
 
