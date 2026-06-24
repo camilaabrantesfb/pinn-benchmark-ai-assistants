@@ -451,7 +451,7 @@ class BurgersEquationSolver:
         plt.colorbar(im1, ax=axes[1], label='u(x,t)')
         
         # Absolute error
-        im2 = axes[2].contourf(eval_data['X'], eval_data['T'], 
+        im2 = axes[2].contourf(eval_data['X'], eval_data['T'],
                                eval_data['abs_error'], levels=50, cmap='hot')
         axes[2].set_xlabel('x', fontsize=12)
         axes[2].set_ylabel('t', fontsize=12)
