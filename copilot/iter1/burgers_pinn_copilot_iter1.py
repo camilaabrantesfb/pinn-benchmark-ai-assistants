@@ -284,7 +284,7 @@ def evaluate_model(model, x_pts, t_pts):
     _, _, u_exact = compute_analytical_grid(x_pts, t_pts)
     error = u_pred - u_exact
     rel_l2 = np.linalg.norm(error) / np.linalg.norm(u_exact)
-    return X, T, u_pred, u_exact, rel_l2
+    return X, T, u_pred, u_exact, error, rel_l2
 
 
 def plot_results(x_pts, t_pts, u_pred, u_exact, rel_l2, loss_history, outdir="outputs"):
@@ -332,6 +332,36 @@ def plot_results(x_pts, t_pts, u_pred, u_exact, rel_l2, loss_history, outdir="ou
     with open(os.path.join(outdir, "burgers_pinn_stats.json"), "w") as f:
         json.dump(stats, f, indent=2)
 
+
+def plot_comparison(x_pts, t_pts, u_exact, u_pred, u_err, rel_l2, save_dir="outputs"):
+    """Generate a 3-panel comparison plot: analytical, PINN prediction, and error."""
+    os.makedirs(save_dir, exist_ok=True)
+
+    fig = plt.figure(figsize=(15, 5))
+    gs = gridspec.GridSpec(1, 3, figure=fig)
+
+    titles = ["Analytical Solution", "PINN Prediction", "Absolute Error"]
+    data = [u_exact.T, u_pred.T, u_err.T]
+    cmaps = ["RdBu_r", "RdBu_r", "hot_r"]
+
+    for idx, (field, title, cmap) in enumerate(zip(data, titles, cmaps)):
+        ax = fig.add_subplot(gs[idx])
+        im = ax.pcolormesh(x_pts, t_pts, field, cmap=cmap, shading="auto")
+        plt.colorbar(im, ax=ax)
+        ax.set_xlabel("x")
+        ax.set_ylabel("t")
+        ax.set_title(title)
+
+    fig.suptitle(
+        f"1D Burgers' PINN (ν={NU:.5f}) — Rel. L² Error: {rel_l2:.4e}",
+        fontsize=12,
+        fontweight="bold",
+    )
+    plt.tight_layout()
+    plt.savefig(f"{save_dir}/burgers_solution_comparison_copilot.png", dpi=150)
+    plt.close()
+    print(f"[Plot] Saved solution comparison → {save_dir}/burgers_solution_comparison_copilot.png")
+
 # ---------------------------------------------------------------------------
 # Main execution
 # ---------------------------------------------------------------------------
@@ -347,10 +377,11 @@ def main():
 
     x_eval = np.linspace(X_LEFT, X_RIGHT, 100)
     t_eval = np.linspace(T_START, T_END, 100)
-    _, _, u_pred, u_exact, rel_l2 = evaluate_model(model, x_eval, t_eval)
+    _, _, u_pred, u_exact, u_err, rel_l2 = evaluate_model(model, x_eval, t_eval)
     print(f"Relative L2 error versus analytical Cole-Hopf solution: {rel_l2:.6e}")
 
     plot_results(x_eval, t_eval, u_pred, u_exact, rel_l2, loss_history)
+    plot_comparison(x_eval, t_eval, u_exact, u_pred, u_err, rel_l2)
     torch.save(model.state_dict(), os.path.join("outputs", "burgers_pinn_copilot_iter1.pth"))
     print("Saved model and plots to outputs/.")
 
