@@ -97,6 +97,9 @@ python cursor/iter1/burgers_pinn_cursor_iter1.py
 
 # Run Claude's pipeline (Iteration 1)
 python claude/iter1/burgers_pinn_claude_iter1.py
+
+# Run GitHub Copilot's pipeline (Iteration 1)
+python copilot/iter1/burgers_pinn_copilot_iter1.py
 ```
 
 Outputs (plots + model weights) are saved to `outputs/`.
@@ -120,7 +123,7 @@ matplotlib
 |---|---|---|---|---|
 | Claude | 1.06e-01 | 1.78e-04 | 1 | 5000 Adam + 1000 L-BFGS steps |
 | Cursor | 1.22e-01 | 1.93e-04 | 1 | 5000 Adam + 1000 L-BFGS steps |
-| GitHub Copilot | — | — | — | Pending |
+| GitHub Copilot | 1.39e-01 | 6.14e-04 | 1 | 5000 Adam + 500 L-BFGS steps |
 | IBM Bob | — | — | — | Conditional |
 
 ---
