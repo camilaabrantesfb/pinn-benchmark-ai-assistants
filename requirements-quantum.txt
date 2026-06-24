@@ -1,0 +1,4 @@
+qiskit>=2.4
+qiskit-algorithms>=0.3
+scipy
+matplotlib

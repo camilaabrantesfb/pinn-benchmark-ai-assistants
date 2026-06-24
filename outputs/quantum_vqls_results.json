@@ -1,0 +1,26 @@
+{
+  "method": "VQLS (Variational Quantum Linear Solver)",
+  "backend": "Qiskit statevector simulator (qiskit 2.4.2)",
+  "n_qubits": 2,
+  "N_grid": 4,
+  "nu": 0.003183098861837907,
+  "dx": 0.4,
+  "dt": 0.01,
+  "condition_number_kappa": 1.0006437463503934,
+  "vqls_final_cost": 6.08916916888802e-10,
+  "vqls_iterations": 53,
+  "rel_l2_error_vqls_vs_classical": 2.4668326806154548e-05,
+  "x_classical": [
+    0.9996023104328995,
+    0.0001988250060611879,
+    0.00019882500606118792,
+    0.9996023104328996
+  ],
+  "x_vqls": [
+    0.9995893241213112,
+    0.00021880611787893545,
+    0.00017692620694778459,
+    0.9996152965176197
+  ],
+  "seminar_connection": "Proof-of-concept quantum extension of the Cole-Hopf linear solve, following the QSciML trajectory described in Nogueira (2024): hybrid quantum-classical algorithms for SciML linear algebra cores."
+}
